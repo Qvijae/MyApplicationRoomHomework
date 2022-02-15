@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 class MainActivityViewModel {
     var fieldKey: ObservableField<String> = ObservableField("")
     var fieldValue: ObservableField<String> = ObservableField("")
+    var fieldAll: ObservableField<String> = ObservableField("")
 
     private var keyValuePairsRepository =
         GlobalVariables.instance.appDatabase.keyValuePairsRepository
@@ -35,7 +36,7 @@ class MainActivityViewModel {
             var key = fieldKey.get().toString()
             var value = fieldValue.get().toString()
 
-            keyValuePairsRepository.insert(KeyValuePair(key, value))
+            keyValuePairsRepository.insert(KeyValuePair(key.toInt(), value))
 
             fieldKey.set("")
             fieldValue.set("")
@@ -48,7 +49,7 @@ class MainActivityViewModel {
             var key = fieldKey.get().toString()
             var value = fieldValue.get().toString()
 
-            keyValuePairsRepository.update(KeyValuePair(key, value))
+            keyValuePairsRepository.update(KeyValuePair(key.toInt(), value))
 
             fieldKey.set("")
             fieldValue.set("")
@@ -77,5 +78,12 @@ class MainActivityViewModel {
             fieldValue.set("")
         }
         Toast.makeText(applicationContext, "Успешно удалено всё", Toast.LENGTH_LONG).show()
+    }
+
+    fun getAll(){
+        GlobalScope.launch(Dispatchers.IO) {
+            fieldAll.set(keyValuePairsRepository.getAll().toString())
+        }
+        Toast.makeText(applicationContext, "Получай еблан", Toast.LENGTH_LONG).show()
     }
 }

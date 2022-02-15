@@ -19,4 +19,7 @@ interface KeyValuePairsRepository {
 
     @Query("DELETE FROM key_value_pairs WHERE `key` = :key")
     suspend fun deleteByKey(key: String)
+
+    @Query("SELECT * FROM key_value_pairs")
+    suspend fun getAll():List<KeyValuePair>
 }

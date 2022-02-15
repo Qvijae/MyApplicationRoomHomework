@@ -21,16 +21,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Name"
             android:inputType="textPersonName"
-            android:hint="Key"
             android:text="@={viewModel.fieldKey}" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:hint="Score"
             android:inputType="textPersonName"
-            android:hint="Value"
             android:text="@={viewModel.fieldValue}" />
 
         <Button
@@ -58,9 +58,34 @@
             android:text="Delete by key" />
 
         <Button
+            android:id="@+id/getAllButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="@{(view)->viewModel.getAll()}"
+            android:text="get all" />
+
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="@{(view)->viewModel.deleteAll()}"
             android:text="delete all" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@={viewModel.fieldAll}" />
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 </layout>
